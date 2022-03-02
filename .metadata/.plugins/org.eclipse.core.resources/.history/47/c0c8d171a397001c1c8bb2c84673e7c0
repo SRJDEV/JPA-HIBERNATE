@@ -1,0 +1,92 @@
+package com.zensar.controller;
+
+import java.awt.PageAttributes.MediaType;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
+
+import com.zensar.dto.Stock;
+import com.zensar.exception.InvalidStockIdException;
+import com.zensar.service.StockService;
+
+import io.swagger.annotations.ApiOperation;
+
+@RestController
+public class StockController {
+
+	private static Map<Integer, Stock> stockMap = new HashMap<Integer, Stock>();
+
+	@Autowired
+	private StockService stockService;
+
+	private static int lastIndexId = 3;
+
+	@PostMapping(value = "/stock", consumes = { org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+			org.springframework.http.MediaType.APPLICATION_XML_VALUE }, produces = {
+					org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+					org.springframework.http.MediaType.APPLICATION_XML_VALUE })
+	public Stock createStock(@RequestBody Stock stock) {
+
+//		lastIndexId++;
+//		stock.setId(lastIndexId);
+//		stockMap.put(lastIndexId, stock);
+
+		return stockService.createNewStock(stock);
+
+	}
+
+	@PutMapping(value = "/stock/{id}", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Update Stock By Id")
+
+	public Stock updateStockById(@PathVariable("id") int stockId, @RequestBody Stock stock) {
+
+		return stockService.updateStock(stockId, stock);
+	}
+
+	
+
+	@GetMapping(value = "/stock/{sortType}", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Return AllStoks")
+	public Collection<Stock> getAllStocks() {
+
+		return stockService.getAllStock();
+	}
+
+//@ExceptionHandler
+//public ResponseEntity<String> handleInvalidStockIdException(RuntimeException runtimeException,
+//		WebRequest webRequest){
+//	
+//
+//			return new ResponseEntity<String>("Local Handler Invalid Stock Id",
+//					HttpStatus.BAD_REQUEST);
+//					}
+
+	@GetMapping(value = "/stock/{id}", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Rerurn Stock By Id")
+	public Stock getAllStocksById(@PathVariable("id") int stockId) {
+
+		Stock s = stockMap.get(stockId);
+		if (s != null) {
+
+			return stockMap.get(stockId);
+		} else {
+
+			throw new InvalidStockIdException("Invalid Stock Id " + stockId);
+		}
+
+	}
+
+}

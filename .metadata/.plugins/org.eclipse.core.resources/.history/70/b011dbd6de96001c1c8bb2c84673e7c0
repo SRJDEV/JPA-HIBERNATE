@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/hibernate_poc</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+
+
+		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		<property name="show_sql">true</property>
+		<property name="hbm2ddl.auto">create</property>
+
+		<!--
+		    1.Create -If schema exists, delete it and create new one 
+		    2.Update - If schema exists, update the same one. 
+		    3.Validate -Just confirm if schema is present, 
+			if not then throw an exception 
+			4.Create-Drop - Create a schema -> Perform the operations -> Drop the schema once program execution is done 
+			
+			-->
+
+
+		<!-- Minimum no. of connections -->
+		<property name="hibernate.c3p0.min_size">5</property>
+
+		<!-- Maximum no. of connections -->
+		<property name="hibernate.c3p0.max_size">20</property>
+
+		<mapping class="com.example.one_one.Employee" />
+		<mapping class="com.example.one_one.Profile" />
+
+		<mapping class="com.example.one_many.Question" />
+		<mapping class="com.example.one_many.Answer" />
+
+
+
+	</session-factory>
+</hibernate-configuration>
