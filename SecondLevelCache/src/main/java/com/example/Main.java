@@ -16,6 +16,15 @@ public class Main {
 
 		SessionFactory sessionFactory = cfg.buildSessionFactory();
 
+		/* this is change in code
+		 * for git conflit
+		 * 
+		 * method1(){
+		 * int x=0;
+		 * int y-0 ;
+		 * }
+		 *  */
+		
 		Session session = sessionFactory.openSession();
 		
 		Transaction t = session.beginTransaction();
