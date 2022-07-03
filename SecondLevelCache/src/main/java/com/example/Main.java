@@ -16,12 +16,18 @@ public class Main {
 
 		SessionFactory sessionFactory = cfg.buildSessionFactory();
 
+		/*This is changes from dev_user branch
+		method xyz(){
+			
+			//int x =100;
+	/*}
 		/* this is change in code
 		 * for git conflit
 		 * 
 		 * method1(){
 		 * int x=20; changes on dev branch
 		 * x =90;
+		 * z=100;
 		 * int y-0 ;
 		 * }
 		 *  */
