@@ -16,11 +16,20 @@ public class Main {
 
 		SessionFactory sessionFactory = cfg.buildSessionFactory();
 
-		//This is changes from dev_user branch
-		//method xyz(){
+		/*This is changes from dev_user branch
+		method xyz(){
 			
 			//int x =100;
-	}
+	/*}
+		/* this is change in code
+		 * for git conflit
+		 * 
+		 * method1(){
+		 * int x=0;
+		 * int y-0 ;
+		 * }
+		 *  */
+		
 		Session session = sessionFactory.openSession();
 		
 		Transaction t = session.beginTransaction();
