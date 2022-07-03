@@ -16,6 +16,11 @@ public class Main {
 
 		SessionFactory sessionFactory = cfg.buildSessionFactory();
 
+		//This is changes from dev_user branch
+		//method xyz(){
+			
+			//int x =100;
+	}
 		Session session = sessionFactory.openSession();
 		
 		Transaction t = session.beginTransaction();
