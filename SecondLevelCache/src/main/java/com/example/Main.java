@@ -20,7 +20,7 @@ public class Main {
 		 * for git conflit
 		 * 
 		 * method1(){
-		 * int x=0;
+		 * int x=20; changes on dev branch
 		 * int y-0 ;
 		 * }
 		 *  */
