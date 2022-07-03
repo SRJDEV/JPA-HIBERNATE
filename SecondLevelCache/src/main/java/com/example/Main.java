@@ -21,7 +21,7 @@ public class Main {
 		 * 
 		 * method1(){
 		 * int x=20; changes on dev branch
-		 * x =40;
+		 * x =70;
 		 * int y-0 ;
 		 * }
 		 *  */
